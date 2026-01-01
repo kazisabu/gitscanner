@@ -4,19 +4,19 @@
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![GitHub API](https://img.shields.io/badge/API-GitHub--based-lightgrey?logo=github)](https://docs.github.com/en/rest)
 
-> 🚀 A lightweight GitHub repository scanner that detects secrets, credentials, and patterns from public code using the GitHub API – **without cloning!**  
-> 📤 Sends results directly to your Telegram bot.
+# GitScan: GitHub Repository Keyword & Secret Scanner
+
+GitScan is a lightweight security tool designed to detect secrets, credentials, and specific patterns within public GitHub repositories. Unlike traditional scanners, GitScan leverages the **GitHub API** to inspect code without the need for local cloning, making it fast and resource-efficient.
 
 ---
 
-## ✨ Features
+## Key Features
 
-- 🔎 **No cloning needed** – Scans via GitHub API
-- 🧠 **Custom keyword + extension filters**
-- 🧪 **Scans multiple repos in one shot**
-- 📄 **Generates structured JSON reports**
-- 🤖 **Sends output via Telegram (optional)**
-- 🧰 **Easy setup – plug & play**
+* **API-Based Scanning:** Analyzes code directly via GitHub’s REST API (no `git clone` required).
+* **Customizable Filters:** Define specific keywords and file extensions to target.
+* **Bulk Processing:** Scans multiple repositories in a single execution.
+* **Structured Output:** Generates JSON reports for easy integration with other tools.
+* **Automated Notifications:** Optionally delivers results and report files via Telegram.
 
 ---
 
@@ -45,51 +45,31 @@ python3 -m venv myenv && source myenv/bin/activate
 pip install -r requirements.txt
 ```
 
-⚙️ Configuration
-1️⃣ Add GitHub Token
-Open utils.py
-Replace this block:
-
-python
-Copy
-Edit
+## Configuration
+1. GitHub Authentication
+To avoid rate limiting, provide a GitHub Personal Access Token (PAT) in utils.py:
+```
 token = "ghp_yourgithubtoken"
 headers["Authorization"] = f"token {token}"
-
-2️⃣ Add Telegram Credentials
-Open scanner.py
-Set your bot token and multiple chat IDs:
-
-python
-Copy
-Edit
+```
+## 2. Telegram Integration
+Configure your bot credentials in scanner.py. You can specify multiple recipients:
+```
 TELEGRAM_BOT_TOKEN = "your-bot-token"
 TELEGRAM_CHAT_IDS = ["123456789", "987654321"]
-✅ You can send reports to multiple users
-🆔 To get chat_id, talk to your bot and visit:
+```
+3. Define Targets
+Add the repositories you wish to scan to repos.txt, ensuring there is one URL per line:
+```
+https://github.com/target_1/target_repo_1
+https://github.com/target_2/target_repo_2
+```
+One repo URL per line
+Supports scanning multiple public repos
 
-3️⃣ Add Repositories to Scan
-Edit repos.txt like this:
-
-bash
-Copy
-Edit
-https://github.com/n8n-io/n8n
-https://github.com/dr5hn/countries-states-cities-database
-✔️ One repo URL per line
-✔️ Supports scanning multiple public repos
-
-▶️ Running the Tool
-bash
-Copy
-Edit
+Usage
+Execute the scanner using Python:
+```
 python3 scanner.py
-You’ll see output like:
-
-less
-Copy
-Edit
-[+] Scanning https://github.com/n8n-io/n8n
-[+] Scanning https://github.com/xyz/another-repo
-[+] Scan complete. Results saved to output/scan_report.json
-If Telegram is set, a message + report file is sent 📩
+```
+If Telegram notifications are enabled, the bot will transmit a summary and the JSON report file upon completion.
