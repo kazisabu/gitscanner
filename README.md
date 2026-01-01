@@ -21,7 +21,7 @@
 ---
 
 ## 🗂️ Directory Structure
-
+```
 GitScan/
 ├── scanner.py # Main script
 ├── telegram_notify.py # Telegram sending logic
@@ -33,17 +33,17 @@ GitScan/
 │ └── scan_report.json # Final result
 ├── requirements.txt
 └── README.md
-
+```
 ---
 
 ## 🛠️ Installation
 
-```bash
+```
 git clone https://github.com/youruser/GitScan
 cd GitScan
 python3 -m venv myenv && source myenv/bin/activate
 pip install -r requirements.txt
-
+```
 
 ⚙️ Configuration
 1️⃣ Add GitHub Token
